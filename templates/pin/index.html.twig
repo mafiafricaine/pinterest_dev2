@@ -3,15 +3,16 @@
 {% block body %}
     {# {% set pin_count = pins|length %} #}
     {# {{ pin_count }} #}
-    <li><a href="{{ path('app_home') }}">Home</a></li>
+    {# <li><a href="{{ path('app_home') }}">Home</a></li>
      	<p>
-    <li><a href="{{ path('app_pin_create') }}">Create Pin</a></li>
-
+    <li><a href="{{ path('app_pin_create') }}">Create Pin</a></li> #}
+    <h1 align="center"><u>Pinterest</u></h1>
     {% for pin in pins %}
         <article>
        		{# <h1>{{ pin.getTitle() }}</h1>        #}
             <h2><a href="{{ path('app_pin_show', {id: pin.id}) }}">{{ pin.title }} </a></h2>
-        	<p>{{ pin.description|u.truncate(10,'...',false)  }}</p>
+        	<img src = {{ pin.imageName }} width="150" height="200">
+            <p>{{ pin.description|u.truncate(10,'...',false)  }}</p>
             {# <p>Submitted {{ pin.createdAt|date }}</p> #}
             <p>Submitted {{ pin.createdAt|ago }}</p> 
         </article>

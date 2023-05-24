@@ -3,11 +3,16 @@
 	  {% block body %}
 	  {# <a href="/pin/create">Create a Pinterest1</a>  #}
 	  {# <a href="{{ path('app_pin_create') }}">Create a Pinterest2</a>  #}
+		<div class = "row">
+		<div  align = "center" class= "col-md-6 mx-auto">
 		<article>
 			<h1>{{ pin.title }}</h1>
-			<p>{{ pin.description }}</p>
+			
+			<img src = {{ pin.imageName }} width="200" height="300">
+			
+			<h5>{{ pin.description }}</h5>
 			<p>Submitted {{ pin.createdAt|date }}</p>
-			<p>Last Modification {{ pin.updatedAt|date("d/m/Y h:i") }}</p>
+			<p>Last Modification {{ pin.updatedAt|date("d/m/Y H:i") }}</p>
 		</article>
 		<a href="{{ path('app_pin_edit', {id: pin.id}) }}">Edit Pin</a>
         {# <a href="{{ path('app_pin_delete', {id: pin.id}) }}">Delete Pin</a> #}
@@ -18,5 +23,7 @@
 <form id="js-pin-delete-form" action="{{ path('app_pin_delete', {id: pin.id}) }}" method="post" style="display:none;">
 	<input type="hidden" name="_method" value="DELETE">
 </form>
+</div>
+</div>
 
 	  {% endblock %}

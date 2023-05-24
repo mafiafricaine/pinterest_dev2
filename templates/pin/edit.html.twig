@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
-	        {% block title 'Edit Pin #' ~ pin.id %}
-	        {% block body %}
-		<h1>Edit Pin #{{ pin.id }}</h1>	  		
-                            {{ include('pin/_form.html.twig', {'submitButtonText': 'Update Pin'}) }}
-                       {% endblock %}
+{% block title 'Edit Pin #' ~ pin.id %}
+{% block body %}
+	<div class = "row">
+		<div class= "col-md-6 mx-auto">
+			<h1 align="center">Edit Pin #{{ pin.id }}</h1>	  		
+        	{{ include('pin/_form.html.twig', {'submitButtonText': 'Update Pin'}) }}
+		</div>
+	</div>
+{% endblock %}
