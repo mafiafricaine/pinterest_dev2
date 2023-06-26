@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title %}Index Pin!{% endblock %}
 {% block body %}
-    {# {% set pin_count = pins|length %} #}
-    {# {{ pin_count }} #}
+    {% set pin_count = pins|length %}
+    {{ pin_count }}
     {# <li><a href="{{ path('app_home') }}">Home</a></li>
      	<p>
     <li><a href="{{ path('app_pin_create') }}">Create Pin</a></li> #}
     <h1 align="center"><u>Pinterest</u></h1>
-    {% for pin in pins %}
+    {% for pin in pagination %}
         <article>
        		{# <h1>{{ pin.getTitle() }}</h1>        #}
             <h2><a href="{{ path('app_pin_show', {id: pin.id}) }}">{{ pin.title }} </a></h2>
-        	<img src = {{ pin.imageName }} width="150" height="200">
+        	{# <img src = {{ pin.imageName }} width="150" height="200"> #}
+            <img style="max-width: 250px;" src={{ vich_uploader_asset(pin, 'imageFile') }}>
             <p>{{ pin.description|u.truncate(10,'...',false)  }}</p>
             {# <p>Submitted {{ pin.createdAt|date }}</p> #}
             <p>Submitted {{ pin.createdAt|ago }}</p> 
@@ -21,5 +22,15 @@
     {% else %}
        	<p> Sorry, no pin yet </p>
     {% endfor %}
+   {# <div class="navigation"> #}
+    {# {{ knp_pagination_render(pagination) }} #}
+{# </div> #}
+    {# {{ knp_pagination_render(pagination) }} #}
+    {{ knp_pagination_render(pagination, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+}) }}
+    
 {% endblock %}
 

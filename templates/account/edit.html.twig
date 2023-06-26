@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Update Profile' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="text-center my-5">Update Profile</h1>
+        {{ form_start(userForm) }}
+        {{ form_row(userForm.firstname)}}
+        {{ form_row(userForm.lastname)}}
+        {{ form_row(userForm.email)}}
+        <button type="submit" class="btn btn-primary" formnovalidate>Apply changes </button>
+        {{ form_end(userForm) }}   
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,8 @@
 		<article>
 			<h1>{{ pin.title }}</h1>
 			
-			<img src = {{ pin.imageName }} width="200" height="300">
+			            <img style="max-width: 450px;" src={{ vich_uploader_asset(pin, 'imageFile') }}>
+
 			<p>By {{ pin.user.firstname ~ " " ~ pin.user.lastname }}</p>
 			
 			<h5>{{ pin.description }}</h5>

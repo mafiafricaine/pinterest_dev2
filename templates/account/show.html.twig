@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+<div class = "row">
+        <div class = "col-md-6 mx-auto text-center">
+            <h1>Profile</h1>
+            <img width="200" height="200" class="bd-placeholder-img rounded-circle" src={{ vich_uploader_asset(app.user, 'imageFile') }}>
+            <p>{{ app.user.email }}</p>
+            <h4>{{ app.user.firstname ~" "~ app.user.lastname }}</h4>
+            <p>Account created on {{ app.user.createdAt|date }}</p>
+            <p>
+                <a href={{ path('app_account_edit') }}>Edit Account</a>
+            </p>
+        </div>
+    </div>
+
+    <div class = "container text-center">
+    <div class = "row">
+    <h3>My Pins</h3> 
+    {% for pin in app.user.pins %} 
+            <article class = "col-4">
+            <h3><a href={{ path('app_pin_show', {id: pin.id}) }}>{{ pin.title|u.truncate(30,'...',false) }}</a></h3>
+            <img style="max-width: 200px;" src={{ vich_uploader_asset(pin, 'imageFile') }}>
+            <h5>{{ pin.description|u.truncate(15,'...',false) }}</h5>
+            <p>Submitted {{ pin.createdAt|ago }}
+            <p>By {{ pin.user.firstname ~ ' ' ~ pin.user.lastname }}
+            </article>
+    {% else %}
+        <p> Sorry, no video yet </p>
+    {% endfor %}
+    </div>
+    </div>
+
+{% endblock %}

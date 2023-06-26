@@ -12,11 +12,14 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Form\PinType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
+// use Knp\Component\Pager\Pagination\PaginationInterface;
 
 class PinController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(ManagerRegistry $doctrine, PinRepository $repo): Response
+    public function index(ManagerRegistry $doctrine, PinRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
         if ($this->getUser()) {
             if (!$this->getUser()->isVerified()) {
@@ -64,8 +67,15 @@ class PinController extends AbstractController
         // $em->persist($pin5);
 
         // $em->flush();
-
-        return $this->render('pin/index.html.twig', ['pins' => $repo->findAll()]);
+        $pagination = $paginator->paginate(
+            $repo->paginationQuery(),
+            $request->query->get('page', 1),
+            3
+        );
+        return $this->render('pin/index.html.twig', [
+            'pagination' => $pagination,
+            // 'pins' => $repo->findAll()
+        ]);
     }
 
     #[Route('/pin/{id<[0-9]+>}', name: 'app_pin_show', methods: 'GET')]

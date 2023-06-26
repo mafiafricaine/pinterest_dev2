@@ -1,0 +1,15 @@
+vich_uploader:
+  db_driver: orm
+
+  metadata:
+    type: attribute, annotation
+
+  mappings:
+    users:
+      uri_prefix: /images/users
+      upload_destination: "%kernel.project_dir%/public/images/users"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+    pins:
+      uri_prefix: /images/pins
+      upload_destination: "%kernel.project_dir%/public/images/pins"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
